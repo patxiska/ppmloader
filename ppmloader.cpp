@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "ppmloader.h"
 
+// http://paulbourke.net/dataformats/ppm/
 
 /*
  * src = Image pointer

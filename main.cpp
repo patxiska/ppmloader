@@ -44,13 +44,11 @@ void test_image(){
   delete [] data;
 }
 
-void test_load(){
+void test_load_color(const string& filename){
 
   uchar* data = NULL;
   int width = 0, height = 0;
   PPM_LOADER_PIXEL_TYPE pt = PPM_LOADER_PIXEL_TYPE_INVALID;
-//  std::string filename = "buda.0.ppm";
-  std::string filename = "prueba.ppm";
 
   bool ret = LoadPPMFile(&data, &width, &height, &pt, filename.c_str());
   if (!ret || width == 0|| height == 0|| pt!=PPM_LOADER_PIXEL_TYPE_RGB_8B)
@@ -80,11 +78,46 @@ void test_save(){
   }
 }
 
+
+void test_load_gray(const string& filename){
+
+  uchar* data = NULL;
+  int width = 0, height = 0;
+  PPM_LOADER_PIXEL_TYPE pt = PPM_LOADER_PIXEL_TYPE_INVALID;
+
+  bool ret = LoadPPMFile(&data, &width, &height, &pt, filename.c_str());
+  if (!ret || width == 0|| height == 0|| pt!=PPM_LOADER_PIXEL_TYPE_GRAY_8B)
+  {
+    throw runtime_error("test_load failed");
+  }
+  cout << width << " " << height << endl;
+
+  delete [] data;
+}
+
+
+void test_orlFaces(const string& path) {
+
+  for(int i=1; i <= 40; ++i)
+    for(int j=1; j <= 10; ++j){
+      string filename = path + "s"+to_string(i)+"/"+to_string(j)+".pgm";
+
+      cout << filename << endl;
+
+      test_load_gray(filename);
+    }
+}
+
+
+
 int main() {
 
-  test_load();
+  test_load_color("buda.0.ppm");
+  test_load_gray("s11.pgm");
   test_save();
   test_image();
+  // http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html
+  test_orlFaces("/home/pachi/Descargas/orl_faces/");
 
   return 0;
 }
