@@ -12,7 +12,7 @@
 
 
 
-/// Saves a image to a disk in ppm/pgm format.
+/// Saves an image to disk in ppm/pgm format.
 ///
 /// \param filename [in] Output file
 /// \param src [in] Image pointer
