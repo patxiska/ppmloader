@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include "ppmloader.h"
 
 using namespace std;
@@ -96,19 +97,6 @@ void test_load_gray(const string& filename){
 }
 
 
-void test_orlFaces(const string& path) {
-
-  for(int i=1; i <= 40; ++i)
-    for(int j=1; j <= 10; ++j){
-      string filename = path + "s"+to_string(i)+"/"+to_string(j)+".pgm";
-
-      cout << filename << endl;
-
-      test_load_gray(filename);
-    }
-}
-
-
 
 int main() {
 
@@ -116,8 +104,6 @@ int main() {
   test_load_gray("s11.pgm");
   test_save();
   test_image();
-  // http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html
-  test_orlFaces("/home/pachi/Descargas/orl_faces/");
 
   return 0;
 }

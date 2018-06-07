@@ -1,15 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
+/*
+ * Copyright (C) Francisco Gomez-Fernandez <fgomez@dc.uba.ar>
+ * Time-stamp: 2018-06-07 03:16:18
+ *
+ * Simple routines to read and write pgm and ppm files.
+ * See this link for a file format description:
+ *   http://paulbourke.net/dataformats/ppm/
+ */
+#include <cstdio>
+#include <cstdlib>
 #include "ppmloader.h"
 
-// http://paulbourke.net/dataformats/ppm/
 
-/*
- * src = Image pointer
- * pt  = Image type
- *			PPM_LOADER_PIXEL_TYPE_RGB_8B:  Image is organized by rows with colors interleaved
- *			PPM_LOADER_PIXEL_TYPE_GRAY_XB: Image is organized by rows with no colors and X bits per pixel
-*/
+
+/// Saves a image to a disk in ppm/pgm format.
+///
+/// \param filename [in] Output file
+/// \param src [in] Image pointer
+/// \param width [in] number of columns
+/// \param height [in] number of rows
+/// \param pt [in] Image type, see enum _PPM_LOADER_PIXEL_TYPE
+/// \param comments [in] comments to append to header
+/// \return [out] false in case of I/O errors, true otherwise
 bool SavePPMFile(const char *filename, const void *src, int width, int height, PPM_LOADER_PIXEL_TYPE pt, const char* comments)
 {
 	if (filename == NULL || src == NULL)
@@ -116,7 +127,15 @@ bool SavePPMFile(const char *filename, const void *src, int width, int height, P
 }
 
 
-// Remember to free data
+
+/// Loads an image from disk in ppm/pgm format.
+///
+/// \param data [out] Image pointer to write pixel data. Remember to free this pointer.
+/// \param width [out] number of columns
+/// \param height [out] number of rows
+/// \param pt [out] Image type, see enum _PPM_LOADER_PIXEL_TYPE
+/// \param filename [in] Input file
+/// \return [out] false in case of I/O errors, true otherwise
 bool LoadPPMFile(uchar** data, int *width, int *height, PPM_LOADER_PIXEL_TYPE* pt, const char *filename)
 {
 	if (data == NULL || width== NULL || height == NULL || pt == NULL || filename == NULL)
@@ -145,7 +164,7 @@ bool LoadPPMFile(uchar** data, int *width, int *height, PPM_LOADER_PIXEL_TYPE* p
 	}
 
   if (line[2] == '\n') {
-    //fgets(line, 256, fid);
+//    fgets(line, 256, fid);
 
     // Parse comments
     fgets(line, 256, fid);

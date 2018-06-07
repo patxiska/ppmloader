@@ -1,4 +1,13 @@
-#ifndef __PPMPLOADER_H__
+/*
+ * Copyright (C) Francisco Gomez-Fernandez <fgomez@dc.uba.ar>
+ * Time-stamp: 2018-06-07 03:16:18
+ *
+ * Simple routines to read and write pgm and ppm files.
+ * See this link for a file format description:
+ *   http://paulbourke.net/dataformats/ppm/
+ */
+
+#ifndef __PPMLOADER_H__
 #define __PPMLOADER_H__
 
 typedef unsigned char uchar;
